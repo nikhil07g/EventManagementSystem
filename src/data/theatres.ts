@@ -1,0 +1,55 @@
+export interface Theatre {
+  name: string;
+  showtimes: string[];
+  address?: string;
+}
+
+export const theatres: Theatre[] = [
+  { name: "Prasads Multiplex", showtimes: ["12:00pm","11:00pm","5:10pm"] },
+  { name: "Indra Venkataramana Padmavati Cinema (Kachiguda)", showtimes: ["11:00am","6:00pm"] },
+  { name: "INOX GVK One (Banjara Hills)", showtimes: ["10:20am","7:25pm","10:50pm"] },
+  { name: "Devi 70MM 4K Laser & Dolby Atmos (RTC X Roads)", showtimes: ["11:00am","2:30pm","6:00pm","9:30pm"] },
+  { name: "PVR Central Mall (Panjagutta)", showtimes: ["4:40pm","11:05pm"] },
+  { name: "Asian Ganga 4K (Dilsukhnagar)", showtimes: ["11:00am","6:00pm"] },
+  { name: "Santosh Theatre (Ibrahimpatnam)", showtimes: ["11:00am","2:15pm","6:00pm","9:00pm"] },
+  { name: "Miraj Cinemas (Shalini Shivani)", showtimes: ["10:10am","1:40pm","7:20pm"] },
+  { name: "Miraj Raghavendra Theatre (Malkajgiri)", showtimes: ["10:00am","4:20pm","10:35pm"] },
+  { name: "JP Cinemas (Chandanagar)", showtimes: ["10:30am","4:10pm","7:25pm","10:15pm"] },
+  { name: "Asian Sha & Shahensha (Chintal)", showtimes: ["11:15am","6:00pm"] },
+  { name: "Bhujanga 70mm (Jeedimetla)", showtimes: ["11:00am","2:00pm","6:00pm","9:00pm"] },
+  { name: "Miraj Cinemas Geeta (Chandanagar)", showtimes: ["10:10am","1:50pm","7:20pm"] },
+  { name: "Asian Lakshmikala Cinepride (Moosapet)", showtimes: ["11:15am","2:45pm","6:15pm","9:45pm"] },
+  { name: "Asian Cineplanet Multiplex (Kompally)", showtimes: ["10:20am","1:35pm","7:40pm","10:55pm"] },
+  { name: "Asian CineSquare Multiplex (Uppal)", showtimes: ["10:30am","4:15pm","7:30pm","10:40pm"] },
+  { name: "GPR Multiplex (Nizampet)", showtimes: ["10:15am","4:30pm","10:30pm"] },
+  { name: "Asian M Cube Mall (Attapur)", showtimes: ["10:40am","4:25pm","10:35pm"] },
+  { name: "Cinepolis Mantra Mall (Attapur)", showtimes: ["10:00am","1:30pm","4:10pm","11:10pm"] },
+  { name: "PVR Next Galleria Mall (Panjagutta)", showtimes: ["1:05pm","7:25pm","10:50pm"] },
+  { name: "INOX (Maheshwari)", showtimes: ["1:15pm","10:50pm"] },
+  { name: "Cinepolis Sudha Cinemas (Shalibanda)", showtimes: ["10:10am","7:40pm"] },
+  { name: "Platinum Movie Time (Gachibowli)", showtimes: ["9:00am","2:30pm","5:15pm","10:30pm"] },
+  { name: "AMB Cinemas (Gachibowli)", showtimes: ["10:00am","1:20pm","7:00pm","10:35pm","4:45pm"] },
+  { name: "Asian Mukta A2 Laxmi Cinemas (Shamshabad)", showtimes: ["11:00am","6:00pm"] },
+  { name: "PVR (Musarambagh)", showtimes: ["10:00am","1:20pm","7:10pm","11:00pm"] },
+  { name: "PVR (Irrum Manzil)", showtimes: ["10:40am","1:05pm","7:25pm","10:55pm"] },
+  { name: "INOX GSM Mall", showtimes: ["10:30am","1:55pm","7:25pm","10:50pm","4:30pm"] },
+  { name: "PVR (Atrium Gachibowli)", showtimes: ["10:00am","4:40pm","7:40pm"] },
+  { name: "PVR Nexus Mall (Kukatpally)", showtimes: ["10:10am","1:55pm","4:30pm","7:20pm","10:50pm","1:30pm"] },
+  { name: "Cinepolis DSL Virtue Mall (Uppal)", showtimes: ["10:00am","3:50pm","7:45pm","10:50pm"] },
+  { name: "Miraj Cinemas A2A Central Mall (Balanagar)", showtimes: ["10:10am","1:50pm","7:20pm"] },
+  { name: "Sky Mall Multiplex", showtimes: ["10:15am","4:30pm","10:55pm"] },
+  { name: "INOX Sattva Necklace Mall (Kavadiguda)", showtimes: ["11:15am","4:00pm","7:25pm","10:50pm"] },
+  { name: "MovieMax (AMR)", showtimes: ["10:30am","4:30pm","7:30pm","10:30pm","1:30pm"] },
+  { name: "Asian Radhika Multiplex (ECIL)", showtimes: ["10:25am","7:30pm","4:25pm"] },
+  { name: "Cine Town Indra Nagendra (Karmanghat)", showtimes: ["11:00am","6:00pm"] },
+  { name: "Tivoli Cinemas (Secunderabad)", showtimes: ["10:40am","4:40pm","10:50pm"] },
+  { name: "Talluri Theatres (Kushaiguda)", showtimes: ["11:00am","6:00pm"] },
+  { name: "Sensation Cinemas (Khairatabad)", showtimes: ["11:00am","6:00pm"] },
+  { name: "PVR Inorbit (Cyberabad)", showtimes: ["10:40am","1:05pm","7:25pm","10:50pm"] },
+  { name: "PVR Preston Prime (Gachibowli)", showtimes: ["10:05am","7:35pm","1:40pm"] },
+  { name: "AAA Cinemas (Ameerpet)", showtimes: ["10:00am","4:05pm","7:15pm","10:25pm","1:10pm"] },
+  { name: "Aparna Cinemas (Nallagandla)", showtimes: ["10:30am","1:50pm","7:50pm","11:10pm"] },
+  { name: "Cinepolis LuLu Mall (Kukatpally)", showtimes: ["1:15pm","11:15pm","4:40pm"] },
+];
+
+export default theatres;

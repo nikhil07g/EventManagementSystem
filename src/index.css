@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 250 100% 98%;
+    --foreground: 258 90% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 258 90% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 258 90% 12%;
+
+    --primary: 258 90% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 14 100% 65%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 250 30% 94%;
+    --muted-foreground: 258 20% 50%;
+
+    --accent: 14 100% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 258 30% 90%;
+    --input: 258 30% 90%;
+    --ring: 258 90% 48%;
+
+    --radius: 0.75rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(258 90% 48%), hsl(278 90% 58%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(250 100% 99%));
+    --shadow-card: 0 4px 20px -2px hsl(258 90% 48% / 0.1);
+    --shadow-hover: 0 8px 30px -4px hsl(258 90% 48% / 0.2);
+
+    --seat-available: 142 76% 45%;
+    --seat-selected: 217 91% 60%;
+    --seat-booked: 0 84% 60%;
+  }
+
+  .dark {
+    --background: 258 50% 8%;
+    --foreground: 250 100% 98%;
+
+    --card: 258 50% 10%;
+    --card-foreground: 250 100% 98%;
+
+    --popover: 258 50% 10%;
+    --popover-foreground: 250 100% 98%;
+
+    --primary: 258 90% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 14 100% 65%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 258 30% 15%;
+    --muted-foreground: 250 20% 65%;
+
+    --accent: 14 100% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 258 30% 20%;
+    --input: 258 30% 20%;
+    --ring: 258 90% 58%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(258 90% 38%), hsl(278 90% 48%));
+    --gradient-card: linear-gradient(180deg, hsl(258 50% 10%), hsl(258 50% 12%));
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.3);
+    --shadow-hover: 0 8px 30px -4px hsl(258 90% 58% / 0.3);
+
+    --seat-available: 142 76% 45%;
+    --seat-selected: 217 91% 60%;
+    --seat-booked: 0 84% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
