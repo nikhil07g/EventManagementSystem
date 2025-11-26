@@ -89,13 +89,16 @@ const validateLoginPayload = (payload = {}) => {
 // Register
 router.post('/register', async (req, res) => {
   try {
+    console.log('📝 Registration request received');
     const { data, errors } = validateRegisterPayload(req.body);
     if (Object.keys(errors).length) {
+      console.warn('⚠️ Validation failed:', errors);
       return sendError(res, 422, 'Validation failed.', errors);
     }
 
     const existingUser = await User.findOne({ email: data.email });
     if (existingUser) {
+      console.warn(`⚠️ User already exists: ${data.email}`);
       return sendError(res, 409, 'User already exists.');
     }
 
@@ -103,9 +106,10 @@ router.post('/register', async (req, res) => {
     await user.save();
 
     const token = issueToken(user);
+    console.log(`✅ User registered: ${data.email}`);
     return sendSuccess(res, 201, { token, user: sanitizeUser(user) }, 'User registered successfully.');
   } catch (error) {
-    console.error('Registration error:', error);
+    console.error('❌ Registration error:', error);
     return sendError(res, 500, 'Server error during registration.');
   }
 });
@@ -113,25 +117,30 @@ router.post('/register', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
+    console.log('📝 Login request received');
     const { data, errors } = validateLoginPayload(req.body);
     if (Object.keys(errors).length) {
+      console.warn('⚠️ Validation failed:', errors);
       return sendError(res, 422, 'Validation failed.', errors);
     }
 
     const user = await User.findOne({ email: data.email }).select('+password');
     if (!user) {
+      console.warn(`⚠️ User not found: ${data.email}`);
       return sendError(res, 401, 'Invalid credentials.');
     }
 
     const isMatch = await user.comparePassword(data.password);
     if (!isMatch) {
+      console.warn(`⚠️ Invalid password for: ${data.email}`);
       return sendError(res, 401, 'Invalid credentials.');
     }
 
     const token = issueToken(user);
+    console.log(`✅ Login successful: ${data.email}`);
     return sendSuccess(res, 200, { token, user: sanitizeUser(user) }, 'Login successful.');
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('❌ Login error:', error);
     return sendError(res, 500, 'Server error during login.');
   }
 });
@@ -139,16 +148,20 @@ router.post('/login', async (req, res) => {
 // Google OAuth Login
 router.post('/google', async (req, res) => {
   try {
+    console.log('📝 Google OAuth request received');
     const { credential, role } = req.body || {};
 
     if (!credential) {
+      console.warn('⚠️ No credential provided');
       return sendError(res, 400, 'Google credential is required.');
     }
 
     if (!googleClient || !GOOGLE_CLIENT_ID) {
+      console.error('❌ Google OAuth not configured');
       return sendError(res, 500, 'Google OAuth is not configured.');
     }
 
+    console.log('🔍 Verifying Google token...');
     const ticket = await googleClient.verifyIdToken({
       idToken: credential,
       audience: GOOGLE_CLIENT_ID,
@@ -158,15 +171,19 @@ router.post('/google', async (req, res) => {
     const email = payload?.email;
 
     if (!email) {
+      console.warn('⚠️ No email in Google payload');
       return sendError(res, 400, 'Google account does not provide an email address.');
     }
 
     const normalizedEmail = sanitizeEmail(email);
     const normalizedRole = normalizeRole(role);
 
+    console.log(`✅ Google token verified for: ${normalizedEmail}`);
+
     let user = await User.findOne({ email: normalizedEmail }).select('+password');
 
     if (!user) {
+      console.log('👤 Creating new user from Google account');
       user = new User({
         email: normalizedEmail,
         name: payload?.name?.trim() || 'Google User',
@@ -176,6 +193,7 @@ router.post('/google', async (req, res) => {
         password: crypto.randomBytes(16).toString('hex'),
       });
     } else {
+      console.log('👤 Updating existing user');
       if (!user.googleId) {
         user.googleId = payload.sub;
       }
@@ -190,9 +208,13 @@ router.post('/google', async (req, res) => {
     await user.save();
 
     const token = issueToken(user);
-    return sendSuccess(res, 200, { token, user: sanitizeUser(user) }, 'Google login successful.');
+    const sanitizedUser = sanitizeUser(user);
+    
+    console.log('✅ Google login successful, sending response');
+    return sendSuccess(res, 200, { token, user: sanitizedUser }, 'Google login successful.');
   } catch (error) {
-    console.error('Google OAuth error:', error);
+    console.error('❌ Google OAuth error:', error.message);
+    console.error('Full error:', error);
     const message =
       error.message && error.message.toLowerCase().includes('token')
         ? 'Google token is invalid or expired.'
