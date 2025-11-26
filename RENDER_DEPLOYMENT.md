@@ -107,8 +107,6 @@ CORS_ALLOWED_ORIGINS=https://event-management-frontend.onrender.com
 ```
 CORS_ALLOWED_ORIGINS=https://event-management-frontend.onrender.com,https://www.yourdomain.com
 ```
-2. Wait for deployment (5-10 minutes)
-3. Note your frontend URL: `https://event-management-frontend.onrender.com`
 
 ---
 
