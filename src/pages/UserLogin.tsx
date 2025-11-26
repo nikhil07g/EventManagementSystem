@@ -100,6 +100,15 @@ const UserLogin = () => {
     try {
       const data = await api.auth.google(credential, "user");
 
+      if (!data || !data.token || !data.user) {
+        throw new Error("Invalid response from server. Missing authentication data.");
+      }
+
+      if (!data.user.role) {
+        console.warn("User role missing, defaulting to 'user'");
+        data.user.role = 'user';
+      }
+
       persistSession(SESSION_KEYS.user, {
         token: data.token,
         user: data.user,
@@ -107,7 +116,7 @@ const UserLogin = () => {
 
       toast({
         title: "Google Sign-In Successful",
-        description: `Welcome ${data.user.name}!`,
+        description: `Welcome ${data.user.name || 'User'}!`,
       });
       navigate("/user-portal");
     } catch (error) {
@@ -115,6 +124,12 @@ const UserLogin = () => {
       if (error instanceof ApiError) {
         toast({
           title: "Google Sign-In Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else if (error instanceof Error) {
+        toast({
+          title: "Authentication Error",
           description: error.message,
           variant: "destructive",
         });

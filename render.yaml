@@ -20,9 +20,9 @@ services:
         value: production
 
   # Frontend Static Site
-  - type: web
+  - type: static
     name: event-management-frontend
-    runtime: node
+    runtime: static
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     envVars:
@@ -30,3 +30,7 @@ services:
         value: 20.18.0
       - key: VITE_API_BASE_URL
         sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

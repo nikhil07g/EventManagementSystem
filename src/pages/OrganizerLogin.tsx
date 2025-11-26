@@ -113,6 +113,15 @@ const OrganizerLogin = () => {
     try {
       const data = await api.auth.google(credential, "organizer");
 
+      if (!data || !data.token || !data.user) {
+        throw new Error("Invalid response from server. Missing authentication data.");
+      }
+
+      if (!data.user.role) {
+        console.warn("User role missing, defaulting to 'organizer'");
+        data.user.role = 'organizer';
+      }
+
       if (data.user.role !== "organizer") {
         toast({
           title: "Access Denied",
@@ -129,7 +138,7 @@ const OrganizerLogin = () => {
 
       toast({
         title: "Google Sign-In Successful",
-        description: `Welcome ${data.user.name}!`,
+        description: `Welcome ${data.user.name || 'Organizer'}!`,
       });
       navigate("/organizer-dashboard");
     } catch (error) {
@@ -137,6 +146,12 @@ const OrganizerLogin = () => {
       if (error instanceof ApiError) {
         toast({
           title: "Google Sign-In Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else if (error instanceof Error) {
+        toast({
+          title: "Authentication Error",
           description: error.message,
           variant: "destructive",
         });
