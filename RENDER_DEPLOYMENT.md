@@ -39,7 +39,7 @@ Click **"Environment"** tab and add these variables:
 | `GOOGLE_CLIENT_ID` | `your-client-id.apps.googleusercontent.com` | From Google Cloud Console |
 | `PORT` | `4000` | Backend port |
 | `NODE_ENV` | `production` | Environment mode |
-| `CORS_ALLOWED_ORIGINS` | (optional) | Add specific origins if needed |
+| `CORS_ALLOWED_ORIGINS` | `https://event-management-frontend.onrender.com` | **IMPORTANT:** Add your frontend URL here for CORS |
 
 **Generate JWT Secret:**
 ```bash
@@ -52,6 +52,8 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 2. Wait for deployment (5-10 minutes)
 3. Note your backend URL: `https://event-management-api.onrender.com`
 4. Test health endpoint: `https://event-management-api.onrender.com/api/health`
+
+**⚠️ IMPORTANT:** You'll need to update `CORS_ALLOWED_ORIGINS` after deploying the frontend (see Part 2, Step 5)
 
 ---
 
@@ -81,10 +83,30 @@ Click **"Environment"** tab:
 |-----|-------|
 | `VITE_API_BASE_URL` | `https://event-management-api.onrender.com` |
 
-**Important:** Replace with your actual backend URL from Part 1, Step 4.
-
 ### Step 4: Deploy Frontend
 1. Click **"Create Static Site"**
+2. Wait for deployment (5-10 minutes)
+3. Note your frontend URL: `https://event-management-frontend.onrender.com`
+
+### Step 5: Update Backend CORS Settings
+**CRITICAL STEP:** Now that you have your frontend URL, go back to the backend service:
+
+1. Go to your backend service (`event-management-api`)
+2. Click **"Environment"** tab
+3. Find `CORS_ALLOWED_ORIGINS` variable
+4. Update the value to your actual frontend URL: `https://your-frontend-name.onrender.com`
+5. Click **"Save Changes"**
+6. Backend will automatically redeploy (takes 1-2 minutes)
+
+**Example:**
+```
+CORS_ALLOWED_ORIGINS=https://event-management-frontend.onrender.com
+```
+
+**For multiple origins (separated by commas):**
+```
+CORS_ALLOWED_ORIGINS=https://event-management-frontend.onrender.com,https://www.yourdomain.com
+```
 2. Wait for deployment (5-10 minutes)
 3. Note your frontend URL: `https://event-management-frontend.onrender.com`
 
